@@ -10,11 +10,14 @@ const LoginForm = (props) => {
     });
   };
 
-  const loginHandler = () => {
+  const loginHandler = ev => {
+    ev.preventDefault()
+    console.log(fields);
     axios
       .post("http://localhost:5000/api/login", fields)
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
+        console.log(res);
+        localStorage.setItem("token", res.data.payload);
         props.history.push("/friends");
       })
       .catch((err) => console.error(err));
